@@ -21,10 +21,14 @@ public class BusDriverController {
     }
 
     @GetMapping()
-    public String showAll(Model model) {
-        List<BusDriver> drivers = busDriverService.showAll();
+    public String showAll(Model model, @RequestParam(name = "licenceFilter", required = false) String licenceFilter) {
+        if (licenceFilter == null || licenceFilter.isBlank()) {
+            model.addAttribute("drivers", busDriverService.showAll());
+        } else {
+            model.addAttribute("drivers", busDriverService.getByDriverLicence(licenceFilter));
+        }
 
-        model.addAttribute("drivers", drivers);
+
 
 
         return "driver_views/drivers_list";
@@ -58,8 +62,6 @@ public class BusDriverController {
 
         return "driver_views/drivers_list";
     }
-
-
 
 
 }

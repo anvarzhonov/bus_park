@@ -4,40 +4,38 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
-@Entity(name = "bus_driver")
-@Getter
-@Setter
-@ToString
-@RequiredArgsConstructor
+@Entity
+@Table (name = "bus_driver")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class BusDriver {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_driver")
     private Long id;
 
-    private String name;
+    @Column(name = "name_surname")
+    private String nameSurname;
 
-    private String surname;
-
-    @Column(name = "driver_licence")
+    @Column(name = "driver_license")
     private String driverLicence;
 
     @Column(name = "work_experience")
     private int workExperience;
 
+    @Column(name = "kol_flight")
+    private int countFlight;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        BusDriver busDriver = (BusDriver) o;
-        return id != null && Objects.equals(id, busDriver.id);
-    }
+    @OneToMany(mappedBy = "busDriver",cascade = CascadeType.ALL)
+    private List<Bus> buses;
 
-    @Override
-    public int hashCode() {
-        return 0;
-    }
+    @ManyToOne
+    @JoinColumn(name = "id_flight")
+    private BusFlight busFlight;
+
 }

@@ -1,9 +1,11 @@
 package ru.anvarzhonov.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import ru.anvarzhonov.models.BusDriver;
 import ru.anvarzhonov.repository.BusDriverRepository;
+import ru.anvarzhonov.repository.specifications.BusDriverSpecification;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -31,11 +33,11 @@ public class BusDriverService {
     public void remove(Long id) {repository.deleteById(id);}
 
     public List<BusDriver> getByDriverLicence(String nameFilter){
-        if (!nameFilter.contains("%")){
-            nameFilter = String.join("","%",nameFilter, "%");
-        }
 
+        Specification<BusDriver> specification = Specification.where(null);
+        specification = specification.and(BusDriverSpecification.driverLicenceLike(nameFilter));
 
-        return repository.findBusDriverByDriverLicenceLike(nameFilter);
+        return repository.findAll(specification);
+
     }
 }
