@@ -1,0 +1,58 @@
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top" th:fragment="navbar">
+  <div class="container">
+    <a class="navbar-brand" th:href="@{/}">Главная страница</a>
+
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/bus}">Автобусы
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/driver}">Водители
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/flight}">Рейсы
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/insurance}">Страховые компании
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/login}">Login page</a>
+        </li>
+        <li class="nav-item">
+          <td sec:authorize="hasAnyAuthority('ADMIN')">
+            <a class="nav-link" th:href="@{/users}">Users</a>
+          </td>
+        </li>
+      </ul>
+    </div>
+     <div align="right" class="navbar-brand">
+      <div sec:authorize="isAuthenticated()">
+        <div class="">
+          Hello, <a th:href="@{/users/profile}"><span sec:authentication="principal.username">Bill</span></a>
+        </div>
+        <div>
+          <a th:href="@{/logout}">Logout</a>
+        </div>
+      </div>
+
+      <div sec:authorize="!isAuthenticated()">
+        <div>
+          Hello, Unknown. Please <a th:href="@{/login}">Login</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav>
+</html>

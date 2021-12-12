@@ -8,38 +8,31 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table (name = "bus_driver")
+@Table(name = "bus_flight")
 @Getter
 @Setter
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class BusDriver {
-
+public class BusFlight {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_driver")
+    @Column(name = "id_flight")
     private Long id;
 
-    @Column(name = "name_surname")
-    private String nameSurname;
+    @Column(name = "number_flight")
+    private int numberFlight;
 
-    @Column(name = "driver_license")
-    private String driverLicence;
+    @Column(name = "name_start_flight")
+    private String startFlight;
 
-    @Column(name = "work_experience")
-    private int workExperience;
+    @Column(name = "name_end_flight")
+    private String endFlight;
 
-    @Column(name = "kol_flight")
-    private int countFlight;
 
-    @OneToMany(mappedBy = "busDriver",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "busFlight", cascade = CascadeType.ALL)
     @ToString.Exclude
-    private List<Bus> buses;
-
-    @ManyToOne
-    @JoinColumn(name = "id_flight")
-    private BusFlight busFlight;
+    private List<BusDriver> busDriverList;
 
     @Override
     public boolean equals(Object o) {
@@ -49,8 +42,8 @@ public class BusDriver {
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
             return false;
         }
-        BusDriver busDriver = (BusDriver) o;
-        return id != null && Objects.equals(id, busDriver.id);
+        BusFlight busFlight = (BusFlight) o;
+        return id != null && Objects.equals(id, busFlight.id);
     }
 
     @Override

@@ -9,21 +9,20 @@
 <body>
 <div class="container">
     <div class="col-10 mx-auto">
-        <h1>Edit driver</h1>
-        <form th:action="@{/driver/add}" th:method="POST" th:object="${driver}">
+        <h1>Edit bus</h1>
+        <form th:action="@{/bus/add}" th:method="POST" th:object="${bus}">
             <input type="hidden" th:field="*{id}"/>
             <div class="mb-3">
-                <label for="name">Name and Surname</label>
-                <input type="text" class="form-control" th:field="*{nameSurname}" placeholder="Enter name" id="name">
+                <label for="name">Номер автобуса:</label>
+                <input type="text" class="form-control" th:field="*{busNumber}" placeholder="Введите номер автобуса" id="name">
 
-                <label for="workExp">Work Experience</label>
-                <input type="text" class="form-control" th:field="*{workExperience}" placeholder="Enter work experience"
+                <label for="workExp">Id автобусника</label>
+                <input type="text" class="form-control" th:field="*{busDriver}" placeholder="999"
                        id="workExp">
 
-                <label for="licence">Driver Licence</label>
-                <input type="text" class="form-control" th:field="*{driverLicence}" placeholder="Enter driver licence"
+                <label for="licence">Id страховой компании</label>
+                <input type="text" class="form-control" th:field="*{insuranceCompany}" placeholder="324"
                        id="licence">
-
 
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>

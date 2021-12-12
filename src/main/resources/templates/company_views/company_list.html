@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>driver's list</title>
+    <title>Insurance Company List</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
@@ -12,15 +12,13 @@
     <div class="col-10 mx-auto mt-3">
         <div class="row">
             <div class="col-6">
-                <h1>Driver's List</h1>
+                <h1>Insurance Company List</h1>
             </div>
             <div class="col-6">
                 <form class="form-inline" th:method="get">
-                    <input type="text" th:value="${param.licenceFilter}" class="form-control-md"
-                           name="licenceFilter" placeholder="Find">
                     <button type="submit" class="btn btn-outline-dark"><i class="fas fa-search"></i></button>
                     <td sec:authorize="hasAnyAuthority('ADMIN')">
-                    <a class="btn btn-outline-danger" th:href="@{/driver/add}">ADD</a>
+                        <a class="btn btn-outline-danger" th:href="@{/company/add}">ADD</a>
                     </td>
                 </form>
             </div>
@@ -31,27 +29,20 @@
             <thead class="thead-dark">
             <tr>
                 <th scope="col">id</th>
-                <th scope="col">Имя Фамилия</th>
-                <th scope="col">Номер прав</th>
-                <th scope="col">Стаж работы</th>
-                <th scope="col">Количество рейсов</th>
-                <th scope="col">Id рейса</th>
+                <th scope="col">Название компании</th>
+                <th scope="col">Номер контракта</th>
                 <th scope="col">Actions</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="driver: ${drivers}">
-                <th scope="row" th:text="${driver.id}">
-                <th scope="row" th:text="${driver.nameSurname}">
-                <th scope="row" th:text="${driver.driverLicence}">
-                <th scope="row" th:text="${driver.workExperience}"></th>
-                <th scope="row" th:text="${driver.countFlight}"></th>
-                <th scope="row" th:text="${driver.busFlight.id}"></th>
-
+            <tr th:each="c: ${companies}">
+                <th scope="row" th:text="${c.id}">
+                <th scope="row" th:text="${c.nameCompany}">
+                <th scope="row" th:text="${c.contractNumber}">
                 <th>
-                    <a class="btn btn-success" th:href="@{/driver/edit/{id}(id=${driver.id})}"><i
+                    <a class="btn btn-success" th:href="@{/company/edit/{id}(id=${c.id})}"><i
                             class="fas fa-edit"></i></a>
-                    <a class="btn btn-danger" th:href="@{/driver/delete/{id}(id=${driver.id})}"><i
+                    <a class="btn btn-danger" th:href="@{/company/delete/{id}(id=${c.id})}"><i
                             class="fa fa-trash-alt"></i></a>
                 </th>
             </tr>

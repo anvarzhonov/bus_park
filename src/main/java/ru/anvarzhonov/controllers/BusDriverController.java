@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import ru.anvarzhonov.models.BusDriver;
 import ru.anvarzhonov.service.BusDriverService;
 
-import java.util.List;
-
 @Controller
 @RequestMapping("/driver")
 public class BusDriverController {

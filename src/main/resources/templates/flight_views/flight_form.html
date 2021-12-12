@@ -9,27 +9,26 @@
 <body>
 <div class="container">
     <div class="col-10 mx-auto">
-        <h1>Edit driver</h1>
-        <form th:action="@{/driver/add}" th:method="POST" th:object="${driver}">
+        <h1>Edit bus flight</h1>
+        <form th:action="@{/flight/add}" th:method="POST" th:object="${flight}">
             <input type="hidden" th:field="*{id}"/>
             <div class="mb-3">
-                <label for="name">Name and Surname</label>
-                <input type="text" class="form-control" th:field="*{nameSurname}" placeholder="Enter name" id="name">
+                <label for="name">Номер рейса</label>
+                <input type="text" class="form-control" th:field="*{numberFlight}"  id="name">
 
-                <label for="workExp">Work Experience</label>
-                <input type="text" class="form-control" th:field="*{workExperience}" placeholder="Enter work experience"
+                <label for="workExp">Название начала рейса</label>
+                <input type="text" class="form-control" th:field="*{startFlight}"
                        id="workExp">
 
-                <label for="licence">Driver Licence</label>
-                <input type="text" class="form-control" th:field="*{driverLicence}" placeholder="Enter driver licence"
+                <label for="licence">Название конца рейса</label>
+                <input type="text" class="form-control" th:field="*{endFlight}"
                        id="licence">
-
-
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </form>
     </div>
 </div>
+
 
 <div th:replace="fragments/footer :: scripts"></div>
 </body>
